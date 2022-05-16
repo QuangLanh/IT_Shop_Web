@@ -1,0 +1,270 @@
+<div >
+    <div class="navbar navbar-inverse set-radius-zero">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/trangchu">
+
+                    <img src="/images/ic_logo.png">
+                </a>
+
+            </div>
+
+            <div class="right-div">
+                <a href="/dangxuat" class="btn btn-info pull-right">Đăng xuất</a>
+            </div>
+        </div>
+    </div>
+    <!-- LOGO HEADER END-->
+    <section class="menu-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="navbar-collapse collapse ">
+                        <ul id="menu-top" class="nav navbar-nav navbar-right">
+
+                            <li><a href="/users/nguoidung">Tài khoản</a></li>
+                            <li><a href="/danhmuc">Danh mục</a></li>
+                            <li><a href="/danhsachsp">Sản phẩm</a></li>
+                            <li><a href="/api/order/lichsumuahang" class="menu-top-active">Đơn hàng</a></li>
+                            <li><a href="/api/order/thongke">Thống kê</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- MENU SECTION END-->
+    <div class="content-wrapper">
+        <div class="container">
+            <div class="row pad-botm">
+
+                <div class="col-md-12">
+
+
+
+
+                    {{!-- <div class="right-div">
+                        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                            Thêm sản phẩm
+                        </button>
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                            aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="myModalLabel">Thêm sản phẩm</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="panel-body">
+                                            <form role="form">
+                                                <div class="form-group ">
+                                                    <label class="control-label" for="name">Name</label>
+                                                    <input type="text" class="form-control" id="name"
+                                                        onchange="validationForm()" name="name" />
+                                                </div>
+                                                <div class="form-group ">
+                                                    <label class="control-label" for="price">Price</label>
+                                                    <input type="number" class="form-control" id="price"
+                                                        onchange="validationForm()" name="price" />
+                                                </div>
+                                                <div class="form-group ">
+                                                    <label class="control-label" for="name">Size</label>
+                                                    <input type="text" class="form-control" id="size"
+                                                        onchange="validationForm()" name="size" />
+                                                </div>
+                                                <div class="form-group ">
+                                                    <label class="control-label" for="category">Category</label>
+                                                    <select class="form-control" id="category" name="category">
+                                                        {{#each categories}}
+                                                        <option value="{{this._id}}">{{this.name}}</option>
+                                                        {{/each}}
+
+
+                                                    </select>
+                                                </div>
+                                                <div class="form-group ">
+                                                    <img id="img-view" class="display-none img-cover" width="170"
+                                                        height="170" src="" />
+                                                    <input onchange="validationForm()" type="hidden" name="image"
+                                                        id="image" />
+                                                    <input type="file" onchange="onChangeFile()"
+                                                        class="form-control-file border" id="img-file" />
+                                                </div>
+                                                <div class="form-group ">
+                                                    <label class="control-label" for="description">Description</label>
+                                                    <textarea type="text" rows="3" class="form-control" id="description"
+                                                        name="description">
+
+                                    </textarea>
+                                                </div>
+                                                <div class="form-group checkbox">
+                                                    <label class="control-label" for="available">
+
+                                                        <input type="checkbox" value="{{product.available}}"
+                                                            id="available" name="available" />
+
+                                                        Available
+                                                    </label>
+                                                </div>
+                                                <div class="form-group ">
+                                                    <label class="control-label" for="published">Published</label>
+                                                    <input onchange="validationForm()" type="date" class="form-control"
+                                                        id="published" name="published" />
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default"
+                                                        data-dismiss="modal">Đóng</button>
+                                                    <button disabled id="buttonSave" onclick="onSave()" type="button"
+                                                        class="btn btn-primary">Thêm</button>
+                                                    <h2 id="error-msg"></h2>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div> --}}
+                </div>
+
+
+
+
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <h4 class="header-line">Danh sách sản phẩm đã mua</h4>
+
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>STT</th>
+
+                                            <th>Số lượng</th>
+                                            <th>Giá</th>
+                                            <th>Ngày</th>
+                                            <th></th>
+                                            <th>Trạng thái</th>
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each orders}}
+
+                                        <tr>
+                                            <td>{{sothutu @index}}</td>
+
+                                            <td>{{this.productQuantity}}</td>
+                                            <td>{{this.totalmoney}} VND</td>
+                                            <td>{{formatDate this.published}} </td>
+
+
+
+                                            <td><a href="../order/chitietdonhang/{{this._id}}">Chi tiết</a></td>
+                                            <td>
+                                                <button class='btn btn-success' onclick="getIdOrder('{{this._id}}')"
+                                                    data-target="#selectStatusModal" data-toggle="modal"><i
+                                                        class="fa fa-pencil"></i>
+                                                    {{this.status}}</button>
+                                            </td>
+
+                                            {{!-- <td>
+
+                                                <a href="/danhsachsp/{{this._id}}/edit"><button
+                                                        class="btn btn-primary"><i class="fa fa-edit "></i>
+                                                        Edit</button></a>
+
+                                                <button onclick="goDelete('{{this._id}}')" class="btn btn-danger"
+                                                    data-target="#DeleteModal" data-toggle="modal"><i
+                                                        class="fa fa-pencil"></i>
+                                                    Delete</button>
+                                            </td> --}}
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="selectStatusModal" tabindex="-1" role="dialog"
+                    aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"
+                                    aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="myModalLabel">Cập nhật tình trạng của đơn hàng</h4>
+                            </div>
+                            <div class="modal-body">
+                                <select id="selectStatus">
+                                    <option value="Hoàn thành">Giao hàng thành công</option>
+                                    <option value="Đang duyệt">Đang duyệt</option>
+                                    <option value="Chuẩn bị đơn hàng">Chuẩn bị đơn hàng</option>
+                                    <option value="Đang giao">Đang giao</option>
+                                    <option value="Thất bại">Đã hủy</option>
+                                </select>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="panel-body">
+                                    <button onclick="onClose()" type="button" class="btn btn-default"
+                                        data-dismiss="modal">Không</button>
+                                    <button type="button" onclick="onSubmitStatus()" class="btn btn-primary">Có</button>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <script>
+                    let order_id;
+
+                    const getIdOrder = (id) => {
+                        order_id = id;
+                    }
+                    const fetchAPI = async (url, option) => {
+                        const res = await fetch(url, option);
+                        return res.json();
+
+                    }
+
+                    const onSubmitStatus = async () => {
+                        let status = document.querySelector('#selectStatus').value;
+                        console.log(status, order_id);
+                        const url = `http://localhost:3000/api/order/editStatusOrder/${order_id}/${status}`;
+                        const option = {
+                            method: 'post',
+                            headers: { 'Content-Type': 'application/json' }
+                        }
+                        try {
+                            await fetchAPI(url, option);
+                            window.location.href = '/api/order/lichsumuahang';
+                        } catch (e) { console.log('Post error: ', e) }
+                    }
+                </script>
+            </div>
+        </div>
+        <section id="main-content">
+
+    </div>
+    </section>

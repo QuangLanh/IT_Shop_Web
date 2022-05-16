@@ -1,0 +1,166 @@
+<div>
+    <div class="navbar navbar-inverse set-radius-zero">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/trangchu">
+
+                    <img src="/images/logo.png" />
+                </a>
+
+            </div>
+
+            <div class="right-div">
+                <a href="/dangxuat" class="btn btn-info pull-right">Đăng xuất</a>
+            </div>
+        </div>
+    </div>
+    <!-- LOGO HEADER END-->
+    <section class="menu-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="navbar-collapse collapse ">
+                        <ul id="menu-top" class="nav navbar-nav navbar-right">
+                            <li><a href="/users/nguoidung">Tài khoản</a></li>
+                            <li><a href="/danhmuc">Danh mục</a></li>
+                            <li><a href="/danhsachsp">Sản phẩm</a></li>
+                            <li><a href="/api/order/lichsumuahang">Đơn hàng</a></li>
+                            <li><a href="/api/order/thongke" class="menu-top-active">Thống kê</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- MENU SECTION END-->
+    <div class="content-wrapper">
+        <div class="container">
+            <div class="row pad-botm">
+                <div class="col-md-12">
+                    <form role="form" action="/api/order/thongkebangngay" method="post">
+                        <label>Từ ngày:</label>
+                        <input type="date" id="datePicker1" name="day1" value={{day1}}>
+                        <label>Đến ngày:</label>
+                        <input type="date" id="datePicker2" name="day2" value={{day2}}>
+                        <input type="submit">
+                    </form>
+                </div>
+
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Địa chỉ</th>
+                                <th>Tổng tiền</th>
+                                <th>Số lượng</th>
+                                <th>Trạng thái</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each statistical}}
+                            <tr>
+                                <td>{{sothutu @index}}</td>
+
+                                <td>{{this.address}}</td>
+                                <td>{{this.totalmoney}} $</td>
+                                <td>{{this.productQuantity}} </td>
+                                <td onclick="getIdOrder('{{this._id}}')" data-target="#selectStatusModal"
+                                    data-toggle="modal">{{this.status}}</td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr>
+                                <td id="sum"></td>
+                                <td id="amount"></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+</div>
+
+<div class="modal fade" id="selectStatusModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Cập nhật tình trạng của đơn hàng</h4>
+            </div>
+            <div class="modal-body">
+                <select id="selectStatus">
+                    <option value="Hoàn thành">Giao thành công</option>
+                    <option value="Đang duyệt">Đang duyệt</option>
+                    <option value="Chuẩn bị đơn hàng">Chuẩn bị đơn hàng</option>
+                    <option value="Đang giao">Đang giao</option>
+                    <option value="Thất bại">Đã hủy</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <div class="panel-body">
+                    <button onclick="onClose()" type="button" class="btn btn-default"
+                        data-dismiss="modal">Không</button>
+                    <button type="button" onclick="onSubmitStatus()" class="btn btn-primary">Có</button>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    const numbers = statistical;
+    document.getElementById("sum").text = 10;
+
+    function getSum(total, num) {
+        return total + Math.round(num);
+    }
+    const getIdOrder = (id) => {
+        order_id = id;
+    }
+    const onSubmitStatus = async () => {
+        let status = document.querySelector('#selectStatus').value;
+        console.log(status, order_id);
+        const url = `http://localhost:3000/api/order/editStatusOrder/${order_id}/${status}`;
+        const option = {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' }
+        }
+        try {
+            await fetchAPI(url, option);
+            window.location.href = '/api/order/lichsumuahang';
+        } catch (e) { console.log('Post error: ', e) }
+    }
+</script>
+</div>
